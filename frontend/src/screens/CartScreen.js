@@ -22,11 +22,9 @@ const CartScreen = () => {
   const { id } = useParams();
   const productId = id;
 
-  // old way before searchParams
-  //   const queryParams = new URLSearchParams(window.location.search);
-  //   const qty = queryParams ? Number(queryParams.get('qty')) : 1;
-  const [searchParam, setSearchParams] = useSearchParams();
-  const qty = Number(searchParam.get('qty')) ?? 1;
+  // eslint-disable-next-line
+  const [searchParams, setSearchParams] = useSearchParams();
+  const qty = searchParams.get('qty') ? parseInt(searchParams.get('qty')) : 1;
 
   const navigate = useNavigate();
 
@@ -34,6 +32,8 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     if (productId) {
@@ -45,7 +45,11 @@ const CartScreen = () => {
     dispatch(removeFromCart(id));
   };
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping');
+    if (!userInfo) {
+      navigate('/login?redirect=/shipping');
+    } else {
+      navigate('/shipping');
+    }
   };
 
   return (

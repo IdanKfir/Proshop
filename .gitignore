@@ -11,7 +11,7 @@ node_modules
 /coverage
 
 # production
-/build
+/frontend/build
 
 # misc
 
@@ -25,3 +25,4 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.vscode/settings.json
