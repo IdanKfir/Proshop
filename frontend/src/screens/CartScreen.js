@@ -20,11 +20,10 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = () => {
   const { id } = useParams();
-  const productId = id;
 
   // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
-  const qty = searchParams.get('qty') ? parseInt(searchParams.get('qty')) : 1;
+  const qty = parseInt(searchParams.get('qty')) ?? 1;
 
   const navigate = useNavigate();
 
@@ -36,10 +35,10 @@ const CartScreen = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, qty));
+    if (id) {
+      dispatch(addToCart(id, qty));
     }
-  }, [dispatch, productId, qty]);
+  }, [dispatch, id, qty]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
