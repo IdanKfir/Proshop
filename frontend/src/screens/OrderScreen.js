@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { PayPalButton } from 'react-paypal-button-v2';
-// import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
