@@ -63,7 +63,7 @@ const OrderScreen = () => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || successDeliver) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
@@ -111,14 +111,12 @@ const OrderScreen = () => {
                 <strong>Email: </strong>{' '}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
-
               <p>
                 <strong>Address:</strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
+                {order.shippingAddress.address}, {order.shippingAddress.city}{' '}
                 {order.shippingAddress.postalCode},{' '}
-                {order.shippingAddress.country},
+                {order.shippingAddress.country}
               </p>
-
               {order.isDelivered ? (
                 <Message variant='success'>
                   Delivered on {order.deliveredAt}
@@ -144,7 +142,7 @@ const OrderScreen = () => {
             <ListGroup.Item>
               <h2>Order Items</h2>
               {order.orderItems.length === 0 ? (
-                <Message>Order Is Eempty</Message>
+                <Message>Order is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
                   {order.orderItems.map((item, index) => (
@@ -180,28 +178,24 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
                   <Col>${order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
                   <Col>${order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
                   <Col>${order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
@@ -214,11 +208,13 @@ const OrderScreen = () => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <p>pay now</p>
-                    // <PayPalButton
-                    //   amount={order.totalPrice}
-                    //   onSuccess={successPaymentHandler}
-                    // ></PayPalButton>
+                    console.log('pay now')
+                    //   <PayPalButton
+                    //     amount={order.totalPrice}
+                    // onSuccess=
+
+                    // {successPaymentHandler}
+                    //   />
                   )}
                 </ListGroup.Item>
               )}
@@ -233,7 +229,7 @@ const OrderScreen = () => {
                       className='btn btn-block'
                       onClick={deliverHandler}
                     >
-                      Mark as Delivered
+                      Mark As Delivered
                     </Button>
                   </ListGroup.Item>
                 )}

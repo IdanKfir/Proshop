@@ -11,7 +11,7 @@ const PaymentScreen = () => {
   const { shippingAddress } = cart;
   const navigate = useNavigate();
 
-  if (!shippingAddress) {
+  if (!shippingAddress.address) {
     navigate('/shipping');
   }
 
