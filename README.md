@@ -99,4 +99,4 @@ jane@example.com (Customer)
 ```
 
 
-This is the course project for my [MERN eCommerce From Scratch](https://www.udemy.com/course/mern-ecommerce) course
+Made by me while doing the [MERN eCommerce From Scratch](https://www.udemy.com/course/mern-ecommerce) course
